@@ -22,7 +22,7 @@
 package com.github.jessemull.microflex.util;
 
 /* ------------------------------ Dependencies ------------------------------ */
-
+ 
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -217,7 +217,7 @@ public class DoubleUtil {
             }
             byteList.add(val.byteValue());
         }
-        
+         
         return byteList;
         
     }

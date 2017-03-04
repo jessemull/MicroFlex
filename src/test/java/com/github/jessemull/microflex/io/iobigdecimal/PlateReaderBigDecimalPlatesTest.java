@@ -52,14 +52,14 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import com.github.jessemull.microflex.bigdecimalflex.plate.PlateBigDecimal;
-import com.github.jessemull.microflex.bigdecimalflex.stat.MeanBigDecimal;
-import com.github.jessemull.microflex.bigdecimalflex.plate.StackBigDecimal;
-import com.github.jessemull.microflex.bigdecimalflex.plate.WellBigDecimal;
-import com.github.jessemull.microflex.util.RandomUtil;
-
 import com.github.jessemull.microflex.bigdecimalflex.io.PlateReaderBigDecimal;
 import com.github.jessemull.microflex.bigdecimalflex.io.PlateWriterBigDecimal;
+import com.github.jessemull.microflex.bigdecimalflex.plate.PlateBigDecimal;
+import com.github.jessemull.microflex.bigdecimalflex.stat.MeanBigDecimal;
+import com.github.jessemull.microflex.util.RandomUtil;
+import com.github.jessemull.microflex.bigdecimalflex.plate.StackBigDecimal;
+import com.github.jessemull.microflex.bigdecimalflex.plate.WellBigDecimal;
+
 
 /**
  * Tests the plate reader big decimal test.

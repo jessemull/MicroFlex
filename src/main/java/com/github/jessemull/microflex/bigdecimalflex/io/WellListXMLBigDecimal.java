@@ -37,7 +37,7 @@ import com.github.jessemull.microflex.bigdecimalflex.plate.WellBigDecimal;
  * This is a wrapper class used to marshal/unmarshal a list of XML encoded well objects.
  * 
  * @author Jesse L. Mull
- * @update Updated Oct 17, 2016
+ * @update Updated Oct 17, 2016 
  * @address http://www.jessemull.com
  * @email hello@jessemull.com
  */

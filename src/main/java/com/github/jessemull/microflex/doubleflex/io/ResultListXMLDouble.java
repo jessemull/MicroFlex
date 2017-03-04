@@ -136,7 +136,6 @@ public class ResultListXMLDouble implements Iterable<ResultXMLDouble>{
      * Returns an iterator for result list.
      * @return    Iterator<ResultXMLDouble>
      */
-	@Override
 	public Iterator<ResultXMLDouble> iterator() {
 		return results.iterator();
 	}

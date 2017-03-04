@@ -23,7 +23,7 @@ package com.github.jessemull.microflex.util;
 
 /* ------------------------------ Dependencies ------------------------------ */
 
-import java.math.BigDecimal;
+import java.math.BigDecimal; 
 import java.math.BigInteger;
 
 /**
@@ -373,4 +373,5 @@ public class OverFlowUtil {
         throw new ArithmeticException("Overflow casting " + val + " to a " + 
                                       val.getClass().getSimpleName());
     }
+
 }

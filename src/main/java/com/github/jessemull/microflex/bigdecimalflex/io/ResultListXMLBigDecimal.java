@@ -137,7 +137,6 @@ public class ResultListXMLBigDecimal implements Iterable<ResultXMLBigDecimal>{
      * Returns an iterator for result list.
      * @return    Iterator<ResultXMLBigDecimal>
      */
-	@Override
 	public Iterator<ResultXMLBigDecimal> iterator() {
 		return results.iterator();
 	}

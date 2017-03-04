@@ -137,7 +137,6 @@ public class ResultListXMLBigInteger implements Iterable<ResultXMLBigInteger>{
      * Returns an iterator for result list.
      * @return    Iterator<ResultXMLBigInteger>
      */
-	@Override
 	public Iterator<ResultXMLBigInteger> iterator() {
 		return results.iterator();
 	}

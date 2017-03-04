@@ -20,7 +20,7 @@
 /*--------------------------- Package Declaration ----------------------------*/
 
 package com.github.jessemull.microflex.bigdecimalflex.io;
-
+ 
 /*------------------------------- Dependencies -------------------------------*/
 
 import java.io.BufferedReader;
@@ -60,7 +60,7 @@ import com.github.fge.jsonschema.main.JsonSchemaFactory;
 import com.google.common.io.CharStreams;
 
 import com.github.jessemull.microflex.bigdecimalflex.plate.PlateBigDecimal;
-import com.github.jessemull.microflex.bigdecimalflex.plate.StackBigDecimal;
+import com.github.jessemull.microflex.bigdecimalflex.plate.StackBigDecimal; 
 import com.github.jessemull.microflex.bigdecimalflex.plate.WellBigDecimal;
 import com.github.jessemull.microflex.bigdecimalflex.plate.WellSetBigDecimal;
 

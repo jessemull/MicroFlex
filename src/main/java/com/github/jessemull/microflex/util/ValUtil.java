@@ -55,7 +55,7 @@ public class ValUtil {
 
 	/*------- Methods for validating double wells, well sets and plates ------*/
 	
-    /**
+    /** 
      * Validates the set by checking for wells outside the valid range.
      * @param    int              the number of plate rows
      * @param    int              the number of plate columns

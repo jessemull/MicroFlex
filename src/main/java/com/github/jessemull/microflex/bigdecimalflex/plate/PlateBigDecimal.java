@@ -23,7 +23,7 @@ package com.github.jessemull.microflex.bigdecimalflex.plate;
 
 /* ------------------------------ Dependencies ------------------------------ */
 
-import java.util.ArrayList;
+import java.util.ArrayList; 
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;

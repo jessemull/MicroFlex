@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import com.github.jessemull.microflex.bigdecimalflex.plate.WellSetBigDecimal;
 
-/**
+/** 
  * This is a wrapper class used to marshal/unmarshal a list of XML encoded well set objects.
  * 
  * @author Jesse L. Mull
