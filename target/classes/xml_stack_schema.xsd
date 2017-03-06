@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="plate" type="plateXML"/>
+
+  <xs:element name="stack" type="stackXML"/>
+
+  <xs:element name="stacks" type="stackListXML"/>
+
+  <xs:element name="well" type="simpleWellXML"/>
+
+  <xs:element name="wellset" type="simpleWellSetXML"/>
+
+  <xs:complexType name="stackListXML">
+    <xs:sequence>
+      <xs:element ref="stack" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="stackXML">
+    <xs:sequence>
+      <xs:element name="type" type="xs:string" minOccurs="0"/>
+      <xs:element name="label" type="xs:string" minOccurs="0"/>
+      <xs:element name="rows" type="xs:int"/>
+      <xs:element name="columns" type="xs:int"/>
+      <xs:element name="size" type="xs:int"/>
+      <xs:element name="plates" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="plate" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="plateXML">
+    <xs:sequence>
+      <xs:element name="type" type="xs:string" minOccurs="0"/>
+      <xs:element name="label" type="xs:string" minOccurs="0"/>
+      <xs:element name="descriptor" type="xs:string" minOccurs="0"/>
+      <xs:element name="rows" type="xs:int"/>
+      <xs:element name="columns" type="xs:int"/>
+      <xs:element name="size" type="xs:int"/>
+      <xs:element name="wellsets" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="wellset" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="wells" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="well" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="simpleWellSetXML">
+    <xs:sequence>
+      <xs:element name="label" type="xs:string" minOccurs="0"/>
+      <xs:element name="size" type="xs:int"/>
+      <xs:element name="wells" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="well" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="simpleWellXML">
+    <xs:sequence>
+      <xs:element name="index" type="xs:string" minOccurs="0"/>
+      <xs:element name="values" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="value" type="xs:int" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+

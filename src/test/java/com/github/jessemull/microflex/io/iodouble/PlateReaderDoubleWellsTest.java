@@ -262,7 +262,6 @@ public class PlateReaderDoubleWellsTest {
 				
 				WellBigDecimal input = iter.next();
 				WellBigDecimal output = reader.nextJSONWell();
-				
 				assertEquals(input, output);
 				assertEquals(input.data(), output.data());
 			}

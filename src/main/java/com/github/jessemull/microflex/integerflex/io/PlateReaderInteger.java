@@ -35,8 +35,6 @@ import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -489,11 +487,11 @@ public class PlateReaderInteger extends BufferedReader {
     
     /* Paths to well, well set, plate and stack JSON/XML schemas */
     
-    private final String JSON_RESULT_SCHEMA_PATH = "schemas/json_result_schema.json";
-    private final String JSON_WELL_SCHEMA_PATH = "schemas/json_well_schema.json";
-    private final String JSON_WELLSET_SCHEMA_PATH = "schemas/json_wellset_schema.json";
-    private final String JSON_PLATE_SCHEMA_PATH = "schemas/json_plate_schema.json";
-    private final String JSON_STACK_SCHEMA_PATH = "schemas/json_stack_schema.json";
+    private final String JSON_RESULT_SCHEMA = "json_result_schema.json";
+    private final String JSON_WELL_SCHEMA = "json_well_schema.json";
+    private final String JSON_WELLSET_SCHEMA = "json_wellset_schema.json";
+    private final String JSON_PLATE_SCHEMA = "json_plate_schema.json";
+    private final String JSON_STACK_SCHEMA = "json_stack_schema.json";
     
     /* Default buffer size for a buffered reader is 8192 bytes/chars */
     
@@ -2360,14 +2358,16 @@ public class PlateReaderInteger extends BufferedReader {
         
         try {
         	
+        	ClassLoader classLoader = getClass().getClassLoader();
+        	File schemaFile = new File(classLoader.getResource(schemaPath).getFile());
+
         	/* Convert the string to a JSON node */
 
             JsonNode rootNode = JsonLoader.fromString(input);
 
             /* Get the schema */
-            
-            byte[] encoded = Files.readAllBytes(Paths.get(schemaPath));
-            JsonNode schemaNode = JsonLoader.fromString(new String(encoded));
+
+            JsonNode schemaNode = JsonLoader.fromFile(schemaFile);
             
             JsonSchemaFactory factory = JsonSchemaFactory.byDefault();
             JsonSchema schema = factory.getJsonSchema(schemaNode);
@@ -2389,35 +2389,35 @@ public class PlateReaderInteger extends BufferedReader {
      */
     private void validateJSON(String input) throws ProcessingException, IOException {
 
-    	if(this.validateSchema(this.JSON_RESULT_SCHEMA_PATH, input)) {
+    	if(this.validateSchema(this.JSON_RESULT_SCHEMA, input)) {
     		ObjectMapper mapper = new ObjectMapper();
     		this.resultsJSON = mapper.readValue(this, ResultListPOJOInteger.class);
     		this.indexResultsJSON = 0;
     		return;
     	}
     	
-    	if(this.validateSchema(this.JSON_WELL_SCHEMA_PATH, input)) {
+    	if(this.validateSchema(this.JSON_WELL_SCHEMA, input)) {
     		ObjectMapper mapper = new ObjectMapper();
     		this.wellsJSON = mapper.readValue(this, WellListPOJOInteger.class);
     		this.indexWellsJSON = 0;
     		return;
     	}
 
-    	if(this.validateSchema(this.JSON_WELLSET_SCHEMA_PATH, input)) {
+    	if(this.validateSchema(this.JSON_WELLSET_SCHEMA, input)) {
     		ObjectMapper mapper = new ObjectMapper();
     		this.setsJSON = mapper.readValue(this, WellSetListPOJOInteger.class);
     		this.indexSetsJSON = 0;
     		return;
     	}
 
-    	if(this.validateSchema(this.JSON_PLATE_SCHEMA_PATH, input)) {
+    	if(this.validateSchema(this.JSON_PLATE_SCHEMA, input)) {
     		ObjectMapper mapper = new ObjectMapper();
     		this.platesJSON = mapper.readValue(this, PlateListPOJOInteger.class);
     		this.indexPlatesJSON = 0;
     		return;
     	}
 
-    	if(this.validateSchema(this.JSON_STACK_SCHEMA_PATH, input)) {
+    	if(this.validateSchema(this.JSON_STACK_SCHEMA, input)) {
     		ObjectMapper mapper = new ObjectMapper();
     		this.stacksJSON = mapper.readValue(this, StackListPOJOInteger.class);
     		this.indexStacksJSON = 0;

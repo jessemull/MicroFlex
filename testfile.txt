@@ -1,0 +1,13 @@
+{
+  "wells" : [ {
+    "type" : "Double",
+    "index" : "A1",
+    "size" : 3,
+    "values" : [ 1.0, 5.5, 7.5 ]
+  }, {
+    "type" : "Double",
+    "index" : "B4",
+    "size" : 3,
+    "values" : [ 1.0, 5.5, 7.5 ]
+  } ]
+}

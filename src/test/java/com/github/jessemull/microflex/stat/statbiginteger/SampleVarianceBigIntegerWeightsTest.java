@@ -355,7 +355,6 @@ public class SampleVarianceBigIntegerWeightsTest {
     		BigDecimal result = aggregatedResultMap.get(plate);
 			BigDecimal returned = aggregatedReturnedMap.get(plate);
 			BigDecimal[] corrected = correctRoundingErrors(result, returned);
-			System.out.println(result + " " + returned);
 			assertEquals(corrected[0], corrected[1]);
     	}
     	
