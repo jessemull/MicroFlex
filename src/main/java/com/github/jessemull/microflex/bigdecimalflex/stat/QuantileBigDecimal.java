@@ -135,7 +135,7 @@ import java.util.List;
  * @address http://www.jessemull.com
  * @email hello@jessemull.com
  */
-public class QuantileBigDecimal extends QuantileStatisticBigDecimalsContext {
+public class QuantileBigDecimal extends QuantileStatisticBigDecimalRationalContext {
 
     /* --------- Methods for calculating the quantile of a data set --------  */
     

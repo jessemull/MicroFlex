@@ -19,7 +19,7 @@
 
 /* -------------------------------- Package --------------------------------- */
 
-package com.github.jessemull.microflex.doubleflex.plate;
+package com.github.jessemull.microflex.doubleflex.plate; 
 
 /* ------------------------------ Dependencies ------------------------------ */
 
@@ -2276,13 +2276,14 @@ public class PlateDouble implements Iterable<WellDouble>, Comparable<PlateDouble
         PlateDouble plate = (PlateDouble) object;
         
         return this.rows == plate.rows() &&
-               this.columns == plate.columns() &&
-               this.label.equals(plate.label()) &&
-               this.type == plate.type() &&
-               this.descriptor.equals(plate.descriptor()) &&
-               this.allGroups().equals(plate.allGroups()) &&
-               this.size() == plate.size() &&
-               this.dataType == plate.dataType();
+                this.columns == plate.columns() &&
+                this.label.equals(plate.label()) &&
+                this.type == plate.type() &&
+                this.descriptor.equals(plate.descriptor()) &&
+                this.allGroups().equals(plate.allGroups()) &&
+                this.dataSet().equals(plate.dataSet()) &&
+                this.size() == plate.size() &&
+                this.dataType == plate.dataType();
     }
     
     /**
@@ -2358,6 +2359,12 @@ public class PlateDouble implements Iterable<WellDouble>, Comparable<PlateDouble
             return 1;
         } else if(plate1.dataType != plate2.dataType){
             return -1;
+        }
+        
+        int comparison = plate1.dataSet().compareTo(plate2.dataSet());
+
+        if(comparison != 0) {
+        	return comparison;
         }
         
         return 0;

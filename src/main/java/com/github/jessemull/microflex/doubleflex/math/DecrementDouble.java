@@ -48,7 +48,7 @@ public class DecrementDouble extends MathOperationDoubleUnary {
         List<Double> result = new ArrayList<Double>();
         
         for(double db : list) {
-            result.add(db--);
+            result.add(--db);
         }
         
         return result;

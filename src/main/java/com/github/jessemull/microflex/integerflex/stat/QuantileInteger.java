@@ -133,7 +133,7 @@ import java.util.List;
  * @address http://www.jessemull.com
  * @email hello@jessemull.com
  */
-public class QuantileInteger extends QuantileStatisticIntegers {
+public class QuantileInteger extends QuantileStatisticRational {
 
     /* --------- Methods for calculating the quantile of a data set --------  */
     

@@ -19,7 +19,7 @@
 
 /* -------------------------------- Package -------------------------------- */
 
-package com.github.jessemull.microflex.doubleflex.stat;
+package com.github.jessemull.microflex.integerflex.stat;
 
 /* ----------------------------- Dependencies ------------------------------ */
 
@@ -31,9 +31,9 @@ import java.util.TreeMap;
 
 import com.google.common.base.Preconditions;
 
-import com.github.jessemull.microflex.doubleflex.plate.PlateDouble;
-import com.github.jessemull.microflex.doubleflex.plate.WellDouble;
-import com.github.jessemull.microflex.doubleflex.plate.WellSetDouble;
+import com.github.jessemull.microflex.integerflex.plate.PlateInteger;
+import com.github.jessemull.microflex.integerflex.plate.WellInteger;
+import com.github.jessemull.microflex.integerflex.plate.WellSetInteger;
 
 /**
  * This class calculates descriptive statistics with list and double inputs to
@@ -130,24 +130,24 @@ import com.github.jessemull.microflex.doubleflex.plate.WellSetDouble;
  * @address http://www.jessemull.com
  * @email hello@jessemull.com
  */
-public abstract class QuantileStatisticDoubles {
+public abstract class QuantileStatisticRational {
     
     /* --------------- Well statistics for all plate wells ----------------- */
     
     /**
      * Returns the statistic for each plate well.
-     * @param    PlateDouble    the plate
+     * @param    PlateInteger    the plate
      * @param    double         the double value
      * @return                  map of wells and results
      */
-    public Map<WellDouble, Double> plate(PlateDouble plate, double p) {
+    public Map<WellInteger, Double> plate(PlateInteger plate, double p) {
         
         Preconditions.checkNotNull(plate, "The plate value cannot be null.");
         
-        Map<WellDouble, Double> result = new TreeMap<WellDouble, Double>();
+        Map<WellInteger, Double> result = new TreeMap<WellInteger, Double>();
         
-        for (WellDouble well : plate) {
-            WellDouble clone = new WellDouble(well);
+        for (WellInteger well : plate) {
+            WellInteger clone = new WellInteger(well);
             result.put(clone, well(well, p));
         }
       
@@ -158,20 +158,20 @@ public abstract class QuantileStatisticDoubles {
     /**
      * Returns the statistic for each plate well using the values between the 
      * beginning and ending indices.
-     * @param    PlateDouble    the plate
-     * @param    int            beginning index of subset
-     * @param    int            length of subset
-     * @param    double         the double value
-     * @return                  map of wells and results   
+     * @param    PlateInteger    the plate
+     * @param    int             beginning index of subset
+     * @param    int             length of subset
+     * @param    double          the double value
+     * @return                   map of wells and results   
      */
-    public Map<WellDouble, Double> plate(PlateDouble plate, int begin, int length, double p) {
+    public Map<WellInteger, Double> plate(PlateInteger plate, int begin, int length, double p) {
         
         Preconditions.checkNotNull(plate, "The plate value cannot be null.");
         
-        Map<WellDouble, Double> result = new TreeMap<WellDouble, Double>();
+        Map<WellInteger, Double> result = new TreeMap<WellInteger, Double>();
         
-        for (WellDouble well : plate) {
-            WellDouble clone = new WellDouble(well);
+        for (WellInteger well : plate) {
+            WellInteger clone = new WellInteger(well);
             result.put(clone, well(well, begin, length, p));
         }
         
@@ -183,18 +183,18 @@ public abstract class QuantileStatisticDoubles {
     
     /**
      * Returns the aggregated statistic for the plate.
-     * @param    PlateDouble    the plate
-     * @param    double         the double value
-     * @return                  the aggregated result
+     * @param    PlateInteger    the plate
+     * @param    double          the double value
+     * @return                   the aggregated result
      */
-    public double platesAggregated(PlateDouble plate, double p) {
+    public double platesAggregated(PlateInteger plate, double p) {
         
         Preconditions.checkNotNull(plate, "The plate cannot be null.");
 
         List<Double> aggregated = new ArrayList<Double>();
             
-        for (WellDouble well : plate) {
-            aggregated.addAll(well.data());
+        for (WellInteger well : plate) {
+            aggregated.addAll(well.toDouble());
         }
       
         return calculate(aggregated, p);
@@ -203,23 +203,23 @@ public abstract class QuantileStatisticDoubles {
     
     /**
      * Returns the aggregated statistic for each plate.
-     * @param    Collection<PlateDouble>    collection of plates
-     * @param    double                     the double value
-     * @return                              map of plates and aggregated results
+     * @param    Collection<PlateInteger>    collection of plates
+     * @param    double                      the double value
+     * @return                               map of plates and aggregated results
      */
-    public Map<PlateDouble, Double> platesAggregated(Collection<PlateDouble> collection, double p) {
+    public Map<PlateInteger, Double> platesAggregated(Collection<PlateInteger> collection, double p) {
         
         Preconditions.checkNotNull(collection, "The plate collection cannot be null.");
 
-        Map<PlateDouble, Double> results = new TreeMap<PlateDouble, Double>();
+        Map<PlateInteger, Double> results = new TreeMap<PlateInteger, Double>();
         
-        for(PlateDouble plate : collection) {
+        for(PlateInteger plate : collection) {
             
             List<Double> aggregated = new ArrayList<Double>();
-            PlateDouble clone = new PlateDouble(plate);
+            PlateInteger clone = new PlateInteger(plate);
             
-            for (WellDouble well : plate) {
-                aggregated.addAll(well.data());
+            for (WellInteger well : plate) {
+                aggregated.addAll(well.toDouble());
             }
       
             results.put(clone, calculate(aggregated, p));
@@ -231,23 +231,23 @@ public abstract class QuantileStatisticDoubles {
     
     /**
      * Returns the aggregated statistic for each plate.
-     * @param    PlateDouble[]    array of plates
-     * @param    double           the double value
-     * @return                    map of plates and aggregated result
+     * @param    PlateInteger[]    array of plates
+     * @param    double            the double value
+     * @return                     map of plates and aggregated result
      */
-    public Map<PlateDouble, Double> platesAggregated(PlateDouble[] array, double p) {
+    public Map<PlateInteger, Double> platesAggregated(PlateInteger[] array, double p) {
         
         Preconditions.checkNotNull(array, "The plate array cannot be null.");
 
-        Map<PlateDouble, Double> results = new TreeMap<PlateDouble, Double>();
+        Map<PlateInteger, Double> results = new TreeMap<PlateInteger, Double>();
         
-        for(PlateDouble plate : array) {
+        for(PlateInteger plate : array) {
             
             List<Double> aggregated = new ArrayList<Double>();
-            PlateDouble clone = new PlateDouble(plate);
+            PlateInteger clone = new PlateInteger(plate);
             
-            for (WellDouble well : plate) {
-                aggregated.addAll(well.data());
+            for (WellInteger well : plate) {
+                aggregated.addAll(well.toDouble());
             }
       
             results.put(clone, calculate(aggregated, p));
@@ -260,21 +260,21 @@ public abstract class QuantileStatisticDoubles {
     /**
      * Returns the aggregated statistic for each plate using the values between 
      * the indices.
-     * @param    PlateDouble    the plate
-     * @param    int            beginning index of subset
-     * @param    int            length of subset
-     * @param    double         the double value
-     * @return                  the aggregated result
+     * @param    PlateInteger    the plate
+     * @param    int             beginning index of subset
+     * @param    int             length of subset
+     * @param    double          the double value
+     * @return                   the aggregated result
      */
     public double platesAggregated(
-            PlateDouble plate, int begin, int length, double p) {
+            PlateInteger plate, int begin, int length, double p) {
 
         Preconditions.checkNotNull(plate, "The plate cannot be null.");
 
         List<Double> aggregated = new ArrayList<Double>();
             
-        for (WellDouble well : plate) {
-            aggregated.addAll(well.data().subList(begin, begin + length));
+        for (WellInteger well : plate) {
+            aggregated.addAll(well.toDouble().subList(begin, begin + length));
         }
       
         return calculate(aggregated, p);
@@ -284,26 +284,26 @@ public abstract class QuantileStatisticDoubles {
     /**
      * Returns the aggregated statistic for each plate using the values between 
      * the indices.
-     * @param    Collection<PlateDouble>    collection of plates
-     * @param    int                        beginning index of subset
-     * @param    int                        length of subset
-     * @param    double                     the double value
-     * @return                              map of plates and aggregated results
+     * @param    Collection<PlateInteger>    collection of plates
+     * @param    int                         beginning index of subset
+     * @param    int                         length of subset
+     * @param    double                      the double value
+     * @return                               map of plates and aggregated results
      */
-    public Map<PlateDouble, Double> platesAggregated(
-            Collection<PlateDouble> collection, int begin, int length, double p) {
+    public Map<PlateInteger, Double> platesAggregated(
+            Collection<PlateInteger> collection, int begin, int length, double p) {
         
         Preconditions.checkNotNull(collection, "The plate collection cannot be null.");
         
-        Map<PlateDouble, Double> results = new TreeMap<PlateDouble, Double>();
+        Map<PlateInteger, Double> results = new TreeMap<PlateInteger, Double>();
         
-        for(PlateDouble plate : collection) {
+        for(PlateInteger plate : collection) {
             
             List<Double> aggregated = new ArrayList<Double>();
-            PlateDouble clone = new PlateDouble(plate);
+            PlateInteger clone = new PlateInteger(plate);
             
-            for (WellDouble well : plate) {
-                aggregated.addAll(well.data().subList(begin, begin + length));
+            for (WellInteger well : plate) {
+                aggregated.addAll(well.toDouble().subList(begin, begin + length));
             }
       
             results.put(clone, calculate(aggregated, p));
@@ -317,26 +317,26 @@ public abstract class QuantileStatisticDoubles {
     /**
      * Returns the aggregated statistic for each plate using the values between 
      * the indices.
-     * @param    PlateDouble[]    array of plates
-     * @param    int              beginning index of subset
-     * @param    int              length of subset
-     * @param    double           the double value
-     * @return                    map of plates and aggregated results
+     * @param    PlateInteger[]    array of plates
+     * @param    int               beginning index of subset
+     * @param    int               length of subset
+     * @param    double            the double value
+     * @return                     map of plates and aggregated results
      */
-    public Map<PlateDouble, Double> platesAggregated(
-            PlateDouble[] array, int begin, int length, double p) {
+    public Map<PlateInteger, Double> platesAggregated(
+            PlateInteger[] array, int begin, int length, double p) {
         
         Preconditions.checkNotNull(array, "The plate array cannot be null.");
         
-        Map<PlateDouble, Double> results = new TreeMap<PlateDouble, Double>();
+        Map<PlateInteger, Double> results = new TreeMap<PlateInteger, Double>();
         
-        for(PlateDouble plate : array) {
+        for(PlateInteger plate : array) {
             
             List<Double> aggregated = new ArrayList<Double>();
-            PlateDouble clone = new PlateDouble(plate);
+            PlateInteger clone = new PlateInteger(plate);
             
-            for (WellDouble well : plate) {
-                aggregated.addAll(well.data().subList(begin, begin + length));
+            for (WellInteger well : plate) {
+                aggregated.addAll(well.toDouble().subList(begin, begin + length));
             }
       
             results.put(clone, calculate(aggregated, p));
@@ -351,18 +351,18 @@ public abstract class QuantileStatisticDoubles {
     
     /**
      * Returns the statistic of each well in the well set.
-     * @param    WellSetDouble    the well set
-     * @param    double           the double value
-     * @return                    map of wells and results
+     * @param    WellSetInteger    the well set
+     * @param    double            the double value
+     * @return                     map of wells and results
      */
-    public Map<WellDouble, Double> set(WellSetDouble set, double p) {
+    public Map<WellInteger, Double> set(WellSetInteger set, double p) {
     	
         Preconditions.checkNotNull(set, "The set cannot be null.");
     	
-    	Map<WellDouble, Double> result = new TreeMap<WellDouble, Double>();
+    	Map<WellInteger, Double> result = new TreeMap<WellInteger, Double>();
         
-        for (WellDouble well : set) {
-            WellDouble clone = new WellDouble(well);
+        for (WellInteger well : set) {
+            WellInteger clone = new WellInteger(well);
             result.put(clone, well(well, p));
         }
       
@@ -373,20 +373,20 @@ public abstract class QuantileStatisticDoubles {
     /**
      * Returns the statistic of each well in the well set using the values between 
      * the beginning and ending indices.
-     * @param    WellSetDouble    the well set
-     * @param    int              beginning index of subset
-     * @param    int              length of subset
-     * @param    double           the double value
-     * @return                    map of wells and results
+     * @param    WellSetInteger    the well set
+     * @param    int               beginning index of subset
+     * @param    int               length of subset
+     * @param    double            the double value
+     * @return                     map of wells and results
      */
-    public Map<WellDouble, Double> set(WellSetDouble set, int begin, int length, double p) {
+    public Map<WellInteger, Double> set(WellSetInteger set, int begin, int length, double p) {
         
     	Preconditions.checkNotNull(set, "The well set cannot be null.");
     	
-    	Map<WellDouble, Double> result = new TreeMap<WellDouble, Double>();
+    	Map<WellInteger, Double> result = new TreeMap<WellInteger, Double>();
         
-        for (WellDouble well : set) {
-        	WellDouble clone = new WellDouble(well);
+        for (WellInteger well : set) {
+        	WellInteger clone = new WellInteger(well);
             result.put(clone,  well(well, begin, length, p));
         }
         
@@ -398,18 +398,18 @@ public abstract class QuantileStatisticDoubles {
     
     /**
      * Returns the aggregated statistic for the well set.
-     * @param    WellSetDouble    the well set
-     * @param    double           the double value
-     * @return                    the aggregated result
+     * @param    WellSetInteger    the well set
+     * @param    double            the double value
+     * @return                     the aggregated result
      */
-    public double setsAggregated(WellSetDouble set, double p) {
+    public double setsAggregated(WellSetInteger set, double p) {
         
         Preconditions.checkNotNull(set, "The well set cannot be null.");
 
         List<Double> aggregated = new ArrayList<Double>();
         	
-        for (WellDouble well : set) {
-            aggregated.addAll(well.data());
+        for (WellInteger well : set) {
+            aggregated.addAll(well.toDouble());
         }
       
         return calculate(aggregated, p);
@@ -418,23 +418,23 @@ public abstract class QuantileStatisticDoubles {
     
     /**
      * Returns the aggregated statistic for each well set.
-     * @param    Collection<WellSetDouble>    collection of well sets
-     * @param    double                       the double value
-     * @return                                map of well sets and aggregated results
+     * @param    Collection<WellSetInteger>    collection of well sets
+     * @param    double                        the double value
+     * @return                                 map of well sets and aggregated results
      */
-    public Map<WellSetDouble, Double> setsAggregated(Collection<WellSetDouble> collection, double p) {
+    public Map<WellSetInteger, Double> setsAggregated(Collection<WellSetInteger> collection, double p) {
         
         Preconditions.checkNotNull(collection, "The well set collection cannot be null.");
 
-        Map<WellSetDouble, Double> results = new TreeMap<WellSetDouble, Double>();
+        Map<WellSetInteger, Double> results = new TreeMap<WellSetInteger, Double>();
         
-        for(WellSetDouble set : collection) {
+        for(WellSetInteger set : collection) {
             
             List<Double> aggregated = new ArrayList<Double>();
-            WellSetDouble clone = new WellSetDouble(set);
+            WellSetInteger clone = new WellSetInteger(set);
             
-            for (WellDouble well : set) {
-                aggregated.addAll(well.data());
+            for (WellInteger well : set) {
+                aggregated.addAll(well.toDouble());
             }
       
             results.put(clone, calculate(aggregated, p));
@@ -446,23 +446,23 @@ public abstract class QuantileStatisticDoubles {
     
     /**
      * Returns the aggregated statistic for each well set.
-     * @param    WellSetDouble[]    array of well sets
-     * @param    double             the double value
-     * @return                      map of well sets and aggregated results
+     * @param    WellSetInteger[]    array of well sets
+     * @param    double              the double value
+     * @return                       map of well sets and aggregated results
      */
-    public Map<WellSetDouble, Double> setsAggregated(WellSetDouble[] array, double p) {
+    public Map<WellSetInteger, Double> setsAggregated(WellSetInteger[] array, double p) {
         
         Preconditions.checkNotNull(array, "The well set array cannot be null.");
 
-        Map<WellSetDouble, Double> results = new TreeMap<WellSetDouble, Double>();
+        Map<WellSetInteger, Double> results = new TreeMap<WellSetInteger, Double>();
         
-        for(WellSetDouble set : array) {
+        for(WellSetInteger set : array) {
             
             List<Double> aggregated = new ArrayList<Double>();
-            WellSetDouble clone = new WellSetDouble(set);
+            WellSetInteger clone = new WellSetInteger(set);
             
-            for (WellDouble well : set) {
-                aggregated.addAll(well.data());
+            for (WellInteger well : set) {
+                aggregated.addAll(well.toDouble());
             }
       
             results.put(clone, calculate(aggregated, p));
@@ -475,21 +475,21 @@ public abstract class QuantileStatisticDoubles {
     /**
      * Returns the aggregated statistic for each well set using the values between the 
      * indices.
-     * @param    WellSetDouble    the well set
-     * @param    int              beginning index of subset
-     * @param    int              length of subset
-     * @param    double           the double value
-     * @return                    the aggregated result
+     * @param    WellSetInteger    the well set
+     * @param    int               beginning index of subset
+     * @param    int               length of subset
+     * @param    double            the double value
+     * @return                     the aggregated result
      */
     public double setsAggregated(
-            WellSetDouble set, int begin, int length, double p) {
+            WellSetInteger set, int begin, int length, double p) {
 
         Preconditions.checkNotNull(set, "The well set cannot be null.");
 
         List<Double> aggregated = new ArrayList<Double>();
             
-        for (WellDouble well : set) {
-            aggregated.addAll(well.data().subList(begin, begin + length));
+        for (WellInteger well : set) {
+            aggregated.addAll(well.toDouble().subList(begin, begin + length));
         }
       
         return calculate(aggregated, p);
@@ -499,26 +499,26 @@ public abstract class QuantileStatisticDoubles {
     /**
      * Returns the aggregated statistic for each well set using the values between 
      * the indices.
-     * @param    Collection<WellSetDouble>    collection of well sets
-     * @param    int                          beginning index of subset
-     * @param    int                          length of subset
-     * @param    double                       the double value
-     * @return                                map of well sets and aggregated results
+     * @param    Collection<WellSetInteger>    collection of well sets
+     * @param    int                           beginning index of subset
+     * @param    int                           length of subset
+     * @param    double                        the double value
+     * @return                                 map of well sets and aggregated results
      */
-    public Map<WellSetDouble, Double> setsAggregated(
-            Collection<WellSetDouble> collection, int begin, int length, double p) {
+    public Map<WellSetInteger, Double> setsAggregated(
+            Collection<WellSetInteger> collection, int begin, int length, double p) {
         
         Preconditions.checkNotNull(collection, "The well set collection cannot be null.");
         
-        Map<WellSetDouble, Double> results = new TreeMap<WellSetDouble, Double>();
+        Map<WellSetInteger, Double> results = new TreeMap<WellSetInteger, Double>();
         
-        for(WellSetDouble set : collection) {
+        for(WellSetInteger set : collection) {
             
             List<Double> aggregated = new ArrayList<Double>();
-            WellSetDouble clone = new WellSetDouble(set);
+            WellSetInteger clone = new WellSetInteger(set);
             
-            for (WellDouble well : set) {
-                aggregated.addAll(well.data().subList(begin, begin + length));
+            for (WellInteger well : set) {
+                aggregated.addAll(well.toDouble().subList(begin, begin + length));
             }
       
             results.put(clone, calculate(aggregated, p));
@@ -532,26 +532,26 @@ public abstract class QuantileStatisticDoubles {
     /**
      * Returns the aggregated statistic for each well set using the values between 
      * the indices.
-     * @param    WellSetDouble[]    array of well sets
-     * @param    int                beginning index of subset
-     * @param    int                length of subset
-     * @param    double             the double value
-     * @return                      map of well sets and aggregated results
+     * @param    WellSetInteger[]    array of well sets
+     * @param    int                 beginning index of subset
+     * @param    int                 length of subset
+     * @param    double              the double value
+     * @return                       map of well sets and aggregated results
      */
-    public Map<WellSetDouble, Double> setsAggregated(
-            WellSetDouble[] array, int begin, int length, double p) {
+    public Map<WellSetInteger, Double> setsAggregated(
+            WellSetInteger[] array, int begin, int length, double p) {
         
         Preconditions.checkNotNull(array, "The well set array cannot be null.");
         
-        Map<WellSetDouble, Double> results = new TreeMap<WellSetDouble, Double>();
+        Map<WellSetInteger, Double> results = new TreeMap<WellSetInteger, Double>();
         
-        for(WellSetDouble set : array) {
+        for(WellSetInteger set : array) {
             
             List<Double> aggregated = new ArrayList<Double>();
-            WellSetDouble clone = new WellSetDouble(set);
+            WellSetInteger clone = new WellSetInteger(set);
             
-            for (WellDouble well : set) {
-                aggregated.addAll(well.data().subList(begin, begin + length));
+            for (WellInteger well : set) {
+                aggregated.addAll(well.toDouble().subList(begin, begin + length));
             }
       
             results.put(clone, calculate(aggregated, p));
@@ -566,30 +566,30 @@ public abstract class QuantileStatisticDoubles {
     
     /**
      * Returns the well statistic.
-     * @param    WellDouble     the well
+     * @param    WellInteger    the well
      * @param    double         the double value
      * @return                  the result
      */
-    public double well(WellDouble well, double p) {
+    public double well(WellInteger well, double p) {
         Preconditions.checkNotNull(well, "The well cannot be null.");
-        return calculate(well.data(), p);     
+        return calculate(well.toDouble(), p);     
     }
     
     /**
      * Returns the well statistic for the values between the beginning and ending 
      * indices.
-     * @param    WellDouble     the well
+     * @param    WellInteger    the well
      * @param    int            beginning index of subset
      * @param    int            length of the subset
      * @param    double         the double value
      * @return                  the result
      */
-    public double well(WellDouble well, int begin, int length, double p) {
+    public double well(WellInteger well, int begin, int length, double p) {
         Preconditions.checkNotNull(well, "The well cannot be null.");
         Preconditions.checkArgument(begin <= well.data().size() &&
                                     begin >= 0 &&
                                     begin + length <= well.data().size());   
-        return calculate(well.data(), begin, length, p);
+        return calculate(well.toDouble(), begin, length, p);
         
     }
 

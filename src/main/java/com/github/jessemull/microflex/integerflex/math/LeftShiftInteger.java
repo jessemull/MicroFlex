@@ -74,5 +74,5 @@ public class LeftShiftInteger extends MathOperationIntegerShift {
         
         return result;
     }
-    
+
 }

@@ -1563,7 +1563,21 @@ public class WellSetBigDecimal implements Iterable<WellBigDecimal>, Comparable<W
             return -1;
         }
         
+        Iterator<WellBigDecimal> iter1 = this.iterator();
+        Iterator<WellBigDecimal> iter2 = set.iterator();
         
+        while(iter1.hasNext() && iter2.hasNext()) {
+        	
+        	WellBigDecimal well1 = iter1.next();
+        	WellBigDecimal well2 = iter2.next();
+        	
+        	int comparison = well1.compareTo(well2);
+        	
+        	if(comparison != 0) {
+        		return comparison;
+        	}
+        	
+        }
         
         return 0;
 	}

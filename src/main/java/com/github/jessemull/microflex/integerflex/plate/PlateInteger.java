@@ -2263,7 +2263,7 @@ public class PlateInteger implements Iterable<WellInteger>, Comparable<PlateInte
      * @param    Object    the object
      * @return             true if equal, false otherwise
      */
-    public boolean equals(Object object) {
+     public boolean equals(Object object) {
         
         if (object instanceof PlateInteger == false) {
             return false;
@@ -2281,6 +2281,7 @@ public class PlateInteger implements Iterable<WellInteger>, Comparable<PlateInte
                this.type == plate.type() &&
                this.descriptor.equals(plate.descriptor()) &&
                this.allGroups().equals(plate.allGroups()) &&
+               this.dataSet().equals(plate.dataSet()) &&
                this.size() == plate.size() &&
                this.dataType == plate.dataType();
     }
@@ -2358,6 +2359,12 @@ public class PlateInteger implements Iterable<WellInteger>, Comparable<PlateInte
             return 1;
         } else if(plate1.dataType != plate2.dataType){
             return -1;
+        }
+        
+        int comparison = plate1.dataSet().compareTo(plate2.dataSet());
+
+        if(comparison != 0) {
+        	return comparison;
         }
         
         return 0;

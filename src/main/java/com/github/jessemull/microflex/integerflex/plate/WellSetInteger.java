@@ -34,7 +34,6 @@ import java.util.Set;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import com.google.common.base.Preconditions;
-
 import com.github.jessemull.microflex.plate.WellIndex;
 import com.github.jessemull.microflex.plate.WellList;
 
@@ -1564,7 +1563,21 @@ public class WellSetInteger implements Iterable<WellInteger>, Comparable<WellSet
             return -1;
         }
         
+        Iterator<WellInteger> iter1 = this.iterator();
+        Iterator<WellInteger> iter2 = set.iterator();
         
+        while(iter1.hasNext() && iter2.hasNext()) {
+        	
+        	WellInteger well1 = iter1.next();
+        	WellInteger well2 = iter2.next();
+        	
+        	int comparison = well1.compareTo(well2);
+        	
+        	if(comparison != 0) {
+        		return comparison;
+        	}
+        	
+        }
         
         return 0;
 	}

@@ -136,7 +136,7 @@ import com.github.jessemull.microflex.bigintegerflex.plate.WellSetBigInteger;
  * @address http://www.jessemull.com
  * @email hello@jessemull.com
  */
-public abstract class QuantileStatisticBigIntegersContext {
+public abstract class QuantileStatisticBigIntegerRationalContext {
     
     /* ---------------- Well statistics for all plate wells ----------------- */
     
